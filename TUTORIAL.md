@@ -39,6 +39,7 @@
 
 **IMPORTANT**
 in the gemfile, you have to include just after the first line (source...) the ruby version you have
+
 in my case: 
 
 	> 	#ruby=2.0.0
@@ -68,7 +69,7 @@ postgres -D /usr/local/var/postgres
 
 
 **Why not directly from model to view and viceversa?**
-Because what do we want is to be able to refactor, reuse our code. View can be stupid, and it's easier to exange parts. 
+Because what do we want is to be able to refactor, reuse our code. View can be stupid, and it's easier to exchange parts. 
 
 ####MVC in RoR
 
@@ -120,7 +121,7 @@ Your main page has to be defined in the config file by: root 'home#welcome' (for
 * Controller Name = view folder name
 * Name = template file name
 
-You have to follow this conventios in order to write less code and make it better.
+You have to follow this conventions in order to write less code and make it better.
 
 
 * Cool info: 
@@ -138,7 +139,7 @@ You have to follow this conventios in order to write less code and make it bette
 ####CRUD
 Create, Read, Update, Delete (from database, API, filesystem)
 
-Single responsibility principle: an object should have only one single responsibility.
+Single responsibility principle: an object should has only one single responsibility.
 
 
 ####The first model:
@@ -179,13 +180,13 @@ What is ActiveRecord?
 	* ```set_table_name 'location'```
 
 * It follows the name convention in Rails
-* As you can see, rails have pluralized the name location into locations when you create a table.
+* As you can see, rails has pluralized the name location into locations when you create a table.
 
 
 **Note: to use the console, type: ```rails c```
 
 Then, if you go to app/db/migrate/xxxxxxx_create_locations.rb
-	You'll see how rails have created a table with the name in plural
+	You'll see how rails has created a table with the name in plural
 	
 There you can do any modifications, in our file it has to look like that
 
@@ -206,7 +207,7 @@ Then, you should type in the terminal: ```rake db:migrate ```
 > Important:
 whenever you do migrations, you are not editing your database. In order to avoid doing the same a lot of times. 
 
-In your migration times, you find that you has a t.timestamps which is a date that helps you to know what is the latest version of a modification, for example. 
+In your migration files, you find that you has a t.timestamps which is a date that helps you to know what is the latest version of a modification, for example. 
 
 There is an authomatically column id that rails create for you =D 
 
