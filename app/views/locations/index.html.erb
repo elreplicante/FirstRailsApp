@@ -1,0 +1,23 @@
+	<div class="container-fluid">
+		<div class="row">
+				<div class="panel-body">
+					<div class="panel panel-info">
+  						<div class="panel-heading todo-title"><h2>My locations</h2>
+  						</div>
+  						<div class="panel-body">
+  						<table class="table">
+  						<% @locations.each do |l| %>
+  						<tr>
+  							<td><%=l.name %></td>
+  							<td><%=l.city %></td>
+  							<td><%=l.description %></td>
+  							<td><%=l.zip_code %></td>
+  						</tr>
+  						<%end%>
+  						</table>
+  						</div>
+					</div>
+					<a href="../" class="btn btn-default">Back home</a>
+				</div>
+			</div>
+		</div>

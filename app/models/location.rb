@@ -1,3 +1,5 @@
 class Location < ActiveRecord::Base
-	set_table_name 'location'
+	def self.iron_find(id)
+		self.where(id: id).first
+	end
 end

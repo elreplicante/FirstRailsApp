@@ -252,6 +252,32 @@ Then, to execute the tests:
 
 ```rake rspec```
 
+####Seeding the database
+There is a file in db/seeds.rb, where you can add the lines you want to execute, and it will do it instead of using the comand line.
+
+To execute that file, you have to type:
+
+```rake db:seed```
+
+And for example, if you want to drop all that you have in your database and then execute the seed file, type:
+
+```rake db:drop db:setup```
+
+
+
+####Requesting Data
+Database comunicates with the Model.
+
+#####Implementing the first request =D
+
+```
+#config/routes.rb
+Rails.application.routes.draw do
+	get 'locations' => 'locations#index'
+end
+```
+
+
 
 
 [1]: http://api.rubyonrails.org
