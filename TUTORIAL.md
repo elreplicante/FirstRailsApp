@@ -98,10 +98,10 @@ get 'home' => 'home#welcome'
 
 Now, you have to create the view!
 
-<code>
+```
 	#app/views/home/welcome.html.erb
 	<h1>Welcome!</h1>
-</code>
+```
 
 
 To see your code in the server, go to the browser and type
