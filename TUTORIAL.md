@@ -225,6 +225,33 @@ Migrations commands:
 Create new migration: 
 rails -g migration <migration_name>
 
+####Creating new objects
+
+* You can create new objects in rails using different ways. 
+* Open the rails console: ```rails c```
+* Then type:
+	* ```l = Location.new```
+	* ```l.name = "Home"```
+	* ```l.city = "Barcelona"```
+	* ```l.save```
+
+This is just an example. You can also type:
+	* ```l = Location.create name:'Home', city: 'Barcelona'```
+	* ```l.save```
+
+
+####Testing with RSpec
+
+Don't forget to execute the next line:
+```rails g rspec:install```
+
+It will generate a file called .rspec
+If you don't want to see the warnings, open that file and remove the line: --warnings
+
+Then, to execute the tests:
+
+```rake rspec```
+
 
 
 [1]: http://api.rubyonrails.org
