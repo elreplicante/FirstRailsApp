@@ -45,8 +45,6 @@ in my case:
 	> 	#ruby=2.0.0
 	    ruby '2.0.0'
 
-postgres -D /usr/local/var/postgres
-
 *Note: If you have any problems, which is very probably, just type the errors you find in the terminal and look for it in google =D*
 
 
@@ -141,6 +139,15 @@ Create, Read, Update, Delete (from database, API, filesystem)
 
 Single responsibility principle: an object should has only one single responsibility.
 
+
+####Starting the database
+It's very important that everytime you want to use your database, you have to open a new terminal window and type that:
+
+```
+postgres -D /usr/local/var/postgres
+```
+
+Don't close it while you're using your db.
 
 ####The first model:
 
@@ -279,12 +286,87 @@ end
 ```
 
 
+```
+#controllers/locations_controller.rb
+class LocationsController < ApplicationController
+	def index
+		@locations = Location.order('created_at DESC').limit(10)
+	end
+end
+```
+
+
+```
+	#views/locations/index.html.erb
+	<table class="table">
+  		<% @locations.each do |l| %>
+  			<tr>
+  				<td><%=l.name %></td>
+  				<td><%=l.city %></td>
+  				<td><%=l.description %></td>
+  				<td><%=l.zip_code %></td>
+   			</tr>
+		<%end%>
+```
+
+
+As you can see, you save the result of a query from the controller, and then you can print it in the view as a table, for example.
+
+####Scopes in Ruby
+You can see in the [ruby guide][5] what scopes are:
+
+>Scoping allows you to specify commonly-used queries which can be referenced as method calls on the association objects or models. With these scopes, you can use every method previously covered such as where, joins and includes. All scope methods will return an ActiveRecord::Relation object which will allow for further methods (such as other scopes) to be called on it.
+
+####Testing Controllers
+
+Now, imagine you want to send by url the id of a location, and then show this specific location.
+
+Before anything, we should test. So, let's write what do we want to test in the location controller testing file, which was created authomatically when we created the controller. 
+
+```
+#spec/controllers/locations_controller_spec.rb
+require 'rails_helper'
+
+RSpec.describe LocationsController, :type => :controller do
+	describe "GET #show:id" do
+		before (:each) do
+		  	@location = Location.create!(name: 'Murcia', description: 'Hot City')
+		    get :show, id: @location.id
+		end
+		it "responds successfully with an HTTP 200 status code" do
+      		expect(response).to be_success
+      		expect(response).to have_http_status(200)
+		end
+
+		it "render show template" do
+	      expect(response).to render_template :show
+		end
+	end
+end
+```
+
+Run the test typing the following command: 
+
+```
+rake spec:controllers
+```
+
+We use this command instead of 'rspec' in order to test only the controllers tests. 
+The tests fail, so we have to implement the methods in order to make it work.
+
+In routes.rb, add the line:
+
+```
+get 'locations/:id' => 'locations#show'
+```
+
+And then, in app\views\locations, you will have to create a new view called **show.html.erb**
 
 
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
 [3]: http://github.com/rails/rails
 [4]: http://ruby-doc.org
-[5]: 
+[5]: http://guides.rubyonrails.org/active_record_querying.html
 
 
