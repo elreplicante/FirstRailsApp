@@ -363,10 +363,41 @@ get 'locations/:id' => 'locations#show'
 And then, in app\views\locations, you will have to create a new view called **show.html.erb**
 
 
+**NOTE!**
+
+We can see in the previous test this line: 
+```expect(response).to have_http_status(200)```
+
+We know that that means that the response is ok. Rails has his own words for that, because sometimes it's hard to remember every status number. We can write the following line instead of that:
+```expect(response).to have_http_status(:ok)```
+
+In this [website][6] you can find all the words that are equivalent to the number status, so it will be easier for you and also for the others to understand your code
+
+
+**Note** It is possible that you want to test if a request is not found. If you are using a find_by query, remember that it returns "nil", so it is going to be "found".
+
+
+####Creating layouts
+
+In the repo, you might have seen that in the different layouts there is no <header> or <body> tags, so... How do we render every html file including bootstrap style and javascript files?
+
+The answer is that everything you want to include in every page, as a header, style whatever, should be in the following file:
+
+```app/views/layouts/application.html.erb```
+
+If you don't want to use it in your page, you can change it in your controller (remember that the controller is the middle man between the model and the view), you have to **overwrite** this layout with another layout. You can do that adding a render inside the controller functions, for instance:
+
+def index
+	
+end
+
+
+
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
 [3]: http://github.com/rails/rails
 [4]: http://ruby-doc.org
 [5]: http://guides.rubyonrails.org/active_record_querying.html
+[6]: http://futureshock-ed.com/2011/03/04/http-status-code-symbols-for-rails/
 
 
