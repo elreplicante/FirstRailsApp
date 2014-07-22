@@ -398,6 +398,7 @@ and create another table. In the repo, you can see it at #db/migrate#xxxxx_creat
 
 If we want to create the foreign key, we have to go to the **model** and write the following lines:
 
+
 ```
 #app/models/visit.rb
 	belongs_to :location
@@ -407,6 +408,7 @@ If we want to create the foreign key, we have to go to the **model** and write t
 #app/models/locations.rb
 	has_many : visits
 ```
+
 
 Check that location is in singular and visits is in plural, because a visit belongs only to one location, but a location can have a lot of visits. **Remember to follow the Rails conventions.**
 
