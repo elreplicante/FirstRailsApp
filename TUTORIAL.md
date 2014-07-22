@@ -400,13 +400,13 @@ If we want to create the foreign key, we have to go to the **model** and write t
 
 
 ```
-#app/models/visit.rb
-	belongs_to :location
+	#app/models/visit.rb
+		belongs_to :location
 ```
 
 ```
-#app/models/locations.rb
-	has_many : visits
+	#app/models/locations.rb
+		has_many : visits
 ```
 
 
