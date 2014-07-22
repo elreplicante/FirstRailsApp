@@ -414,11 +414,53 @@ If we want to create the foreign key, we have to go to the **model** and write t
 
 Check that location is in singular and visits is in plural, because a visit belongs only to one location, but a location can have a lot of visits. **Remember to follow the Rails conventions.**
 
+There are also more methods you can find in the [Associations Guide][7]
+
+
+###Seed Fake!
+
+If you want to try now how do your migrations work, there is a amazing gem you can use in order to generate random content in your database. 
+
+In our case, we can write that in our seed.rb file:
+
+
+```
+require 'faker'
+Location.destroy_all
+Visit.destroy_all
+
+20.times do |n|
+	location = Location.create(
+		name: Faker::Company.catch_phrase, 
+		street: Faker::Address.street_address, 
+		city: Faker::Address.city, 
+		zip_code: Faker::Address.zip_code, 
+		country: Faker::Address.country,
+		description: Faker::Lorem.sentence)
+end
+
+40.times do |n|
+		visit = Visit.create(
+			location: Location.all.sample(1)
+			user_name: Faker::Internet.user_name
+		)
+end
+```
+
+What it does is to generate 20 locations and 40 visit for random locations which let you to play with your website with very funny data.
+
+You can see the documentation in the [fake repo][8]
+
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
 [3]: http://github.com/rails/rails
 [4]: http://ruby-doc.org
 [5]: http://guides.rubyonrails.org/active_record_querying.html
 [6]: http://futureshock-ed.com/2011/03/04/http-status-code-symbols-for-rails/
+[7]: http://guides.rubyonrails.org/association_basics.html
+[8]: https://github.com/stympy/faker
+
+
+
 
 

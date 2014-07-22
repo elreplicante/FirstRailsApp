@@ -6,15 +6,7 @@
   						</div>
   						<div class="panel-body">
   						<table class="table">
-  						<% @locations.each do |l| %>
-  						<tr>
-                <td><%=l.id %></td>
-  							<td><%=l.name %></td>
-  							<td><%=l.city %></td>
-  							<td><%=l.description %></td>
-  							<td><%=l.zip_code %></td>
-  						</tr>
-  						<%end%>
+  						<%= render 'location_visit_loop' %>
   						</table>
   						</div>
 					</div>

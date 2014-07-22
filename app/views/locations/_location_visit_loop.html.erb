@@ -1,0 +1,18 @@
+<% @locations.each do |l| %>
+	<tr>
+	<td><%=l.id %></td>
+	<td><%=l.name %></td>
+	<td><%=l.city %></td>
+	<td><%=l.description %></td>
+	<td><%=l.zip_code %></td>
+	<td>
+			<ul>
+			<%= l.visits.count %>
+			<% l.visits.each do  |v| %>
+				<li>sdf</li>
+				<li><%= v.user_name %></li>
+			<%end%>
+			</ul>
+	</td>
+	</tr>
+<%end%>

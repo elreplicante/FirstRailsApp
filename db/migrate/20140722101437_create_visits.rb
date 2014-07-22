@@ -1,10 +1,10 @@
 class CreateVisits < ActiveRecord::Migration
   def change
     create_table :visits do |t|
-      t.locations_id :integer
-      t.user_name :string
-      t.from_date :datetime
-      t.to_date :datetime
+      t.integer :location_id
+      t.string :user_name
+      t.datetime :from_date
+      t.datetime :to_date
       t.timestamps
     end
   end

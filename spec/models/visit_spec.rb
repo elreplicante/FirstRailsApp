@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Visit, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Testing new table visit" do
+  	@location = Location.create!(name: 'Murcia', description: 'Hot City')
+    it "A location with one visit" do
+
+    end
+  end
 end
