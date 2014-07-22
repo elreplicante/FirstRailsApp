@@ -385,13 +385,30 @@ The answer is that everything you want to include in every page, as a header, st
 
 ```app/views/layouts/application.html.erb```
 
+
+
 If you don't want to use it in your page, you can change it in your controller (remember that the controller is the middle man between the model and the view), you have to **overwrite** this layout with another layout. You can do that adding a render inside the controller functions, for instance:
 
-def index
-	
-end
+####Foreign Keys
+Now, let's create another table called "Visits". 
+Remember --> new model --> ```rails g model visit```
 
+Go to the migrations (if you don't remember how, read again how we did it with locations)
+and create another table. In the repo, you can see it at #db/migrate#xxxxx_create_visits.rb
 
+If we want to create the foreign key, we have to go to the **model** and write the following lines:
+
+```
+#app/models/visit.rb
+	belongs_to :location
+```
+
+```
+#app/models/locations.rb
+	has_many : visits
+```
+
+Check that location is in singular and visits is in plural, because a visit belongs only to one location, but a location can have a lot of visits. **Remember to follow the Rails conventions.**
 
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
