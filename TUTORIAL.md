@@ -383,7 +383,9 @@ In the repo, you might have seen that in the different layouts there is no <head
 
 The answer is that everything you want to include in every page, as a header, style whatever, should be in the following file:
 
-```app/views/layouts/application.html.erb```
+```
+	app/views/layouts/application.html.erb
+```
 
 
 
