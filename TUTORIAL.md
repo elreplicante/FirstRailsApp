@@ -478,7 +478,59 @@ end
 
 Here, we wrote "Routes" as a string, but if you see, before we just wrote Location. This is because in the other tests we were calling the model Location, but there is no model for Routes, that's why we wrote it in that way. 
 
+##Logic rules
+	Writing consistent code. For example, in our case, we do not want to create a visit in the past, because all the new visits should be in the same day we are or in the future. 
 
+###ActiveRecord Validations
+
+We do the validations adding the following line in the location model: (remember: app/models/location.rb)
+
+```
+validates :name, presence: true
+```
+
+Now, if we go to the console, this is what we will find:
+
+```
+2.0.0-p481 :001 > location = Location.new
+ => #<Location id: nil, name: nil, created_at: nil, updated_at: nil, city: nil, zip_code: nil, street: nil, country: nil, description: nil>
+2.0.0-p481 :002 > location.valid?
+ => false
+```
+
+Did you see? a location needs to have a name in order to be valid. This is because we were validating the presence of a value. 
+
+We can also check the uniqueness of an attribute. For example, we know that the id attribute for every model is going to be unique, because this is what identifies it. 
+
+Other validations:
+
+* length: {minimum: 3} --> must be bigger than 3 
+* length: {maximum: 10} --> must be smaller than 10
+* length: {in: 3..10} --> must be in between 3 and 10
+* length: {is: 5} --> must be exactly 5
+* format: {with: /\A[0-9]/} --> must match a regular expression
+* inclusion: {in: ['value 1','value 2, 'value 3']} --> it should be contained in an arrange of values
+* exclusion: {in: ['value 1','value 2, 'value 3']}
+* numericality: true
+
+###Custom validations
+
+You can create your own validations!
+
+```
+def from_date_it_before_to_date
+	if from_date.to_i > to_date.to_i
+		errors.add(:form_date, 'Your from date can not be bigger than your to_date')
+	end
+end
+```
+
+
+And then, to include that method as a validation, you have to do it like before but typing "validate" instead of "validates"
+
+```
+validate :from_date_it_before_to_date
+```
 
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
