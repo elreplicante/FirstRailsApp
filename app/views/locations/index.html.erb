@@ -3,9 +3,14 @@
 				<div class="panel-body">
 					<div class="panel panel-info">
   						<div class="panel-heading todo-title"><h2>My locations</h2>
+              <select id="sortby" name="sortby" class="btn btn-lg">
+                <option value="name">Name</option> 
+                <option value="country">Country</option>
+                <option value="city">City</option>
+              </select>
   						</div>
   						<div class="panel-body">
-  						<table class="table">
+  						<table class="table" id="locations_table">
   						<%= render 'location_visit_loop' %>
   						</table>
   						</div>

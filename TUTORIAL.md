@@ -451,6 +451,35 @@ What it does is to generate 20 locations and 40 visit for random locations which
 
 You can see the documentation in the [fake repo][8]
 
+
+##Testing the routes
+
+Inside the "spec" folder, we create a new file called "routes", and then we create a file there to test the locations routes. 
+
+You can find more info about [Testing Routes][9] and [Rspec Routes][10]
+
+This is the way we tested the index routing when going to locations:
+
+```
+require 'rails_helper'
+
+RSpec.describe "Routes", :type => :routing do
+  describe "Testing locations " do
+		it "routes to locations index" do
+			expect(get: "/locations").to route_to("locations#index")
+		end
+
+		it "routes to location with id" do
+			expect(get: "/locations/999").to route_to(controller: "locations", action: "show", id: "999")
+		end
+	end
+end
+```
+
+Here, we wrote "Routes" as a string, but if you see, before we just wrote Location. This is because in the other tests we were calling the model Location, but there is no model for Routes, that's why we wrote it in that way. 
+
+
+
 [1]: http://api.rubyonrails.org
 [2]: http://apidock.com/rails
 [3]: http://github.com/rails/rails
@@ -459,6 +488,12 @@ You can see the documentation in the [fake repo][8]
 [6]: http://futureshock-ed.com/2011/03/04/http-status-code-symbols-for-rails/
 [7]: http://guides.rubyonrails.org/association_basics.html
 [8]: https://github.com/stympy/faker
+[9]: http://guides.rubyonrails.org/testing.html#testing-routes
+[10]: https://www.relishapp.com/rspec/rspec-rails/docs/routing-specs
+
+
+
+
 
 
 

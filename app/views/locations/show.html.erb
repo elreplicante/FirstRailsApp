@@ -5,9 +5,11 @@
   						<div class="panel-heading todo-title"><h2>Location for NAME</h2>
   						</div>
   						<div class="panel-body">
-              <p>Hello World</p>
+              				<h2><%= @location.name %></h2>
+              				<%= render 'visit_loop' %>
   				    </div>
 					</div>
+					<a href="../locations" class="btn btn-default">Back to Locations</a>
 					<a href="../" class="btn btn-default">Back home</a>
 				</div>
 			</div>

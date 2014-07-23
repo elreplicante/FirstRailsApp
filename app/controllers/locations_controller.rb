@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
 	end
 
 	def show
-		@show_location = Location.find(params[:id])
+		@location = Location.find(params[:id])
 	rescue ActiveRecord::RecordNotFound
  			render status: 404
 	end

@@ -14,7 +14,9 @@ end
 
 40.times do |n|
 		visit = Visit.create(
-			location: Location.all.sample(1)
-			user_name: Faker::Internet.user_name
+			location: Location.all.sample(1),
+			user_name: Faker::Internet.user_name,
+			from_date: Faker::Business.credit_card_expiry_date,
+			to_date: Faker::Business.credit_card_expiry_date
 		)
 end
