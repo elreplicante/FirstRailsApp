@@ -479,7 +479,8 @@ end
 Here, we wrote "Routes" as a string, but if you see, before we just wrote Location. This is because in the other tests we were calling the model Location, but there is no model for Routes, that's why we wrote it in that way. 
 
 ##Logic rules
-	Writing consistent code. For example, in our case, we do not want to create a visit in the past, because all the new visits should be in the same day we are or in the future. 
+
+Writing consistent code. For example, in our case, we do not want to create a visit in the past, because all the new visits should be in the same day we are or in the future. 
 
 ###ActiveRecord Validations
 
