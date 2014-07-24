@@ -1,11 +1,9 @@
 ##Rails Project
 
 ###Install rails and create scaffolding
-	> rails new meet_me \
-	--skip-bundle \
-	--database=postgresql \
-	--skip-test-unit
-
+```bash
+$ rails new meet_me --skip-bundle	--database=postgresql --skip-test-unit
+```
 
 * Scaffolding
 	* app
@@ -40,10 +38,12 @@
 **IMPORTANT**
 in the gemfile, you have to include just after the first line (source...) the ruby version you have
 
-in my case: 
+in my case:
 
-	> 	#ruby=2.0.0
-	    ruby '2.0.0'
+```ruby
+#ruby=2.0.0
+ruby '2.0.0'
+```
 
 *Note: If you have any problems, which is very probably, just type the errors you find in the terminal and look for it in google =D*
 
@@ -73,14 +73,14 @@ Because what do we want is to be able to refactor, reuse our code. View can be s
 
 * Generate a controller
 
-```
+```bash
 rails g controller home	
 ```
 It will be created in app/controllers/home_controller.rb
 
 There, we have to create a render like this: 
 
-```
+```ruby
 #app/controllers/home_controller.rb
 class HomeController < ApplicationController
 	def welcome
@@ -91,7 +91,7 @@ end
 
 After that, we have to edit the file config/routes.rb
 
-```
+```ruby
 get 'home' => 'home#welcome'
 ```
 
@@ -143,8 +143,8 @@ Single responsibility principle: an object should has only one single responsibi
 ####Starting the database
 It's very important that everytime you want to use your database, you have to open a new terminal window and type that:
 
-```
-postgres -D /usr/local/var/postgres
+```bash
+$ postgres -D /usr/local/var/postgres
 ```
 
 Don't close it while you're using your db.
@@ -157,11 +157,13 @@ Don't close it while you're using your db.
 
 Generate the model:
 
-```rails g model location```
+```bash
+$ rails g model location
+```
 
 As you can see in the command line, it also generates the test files, because of course you want to test it! =D
 
-```
+```bash
 invoke  active_record
       create    db/migrate/20140721093846_create_locations.rb
       create    app/models/location.rb
@@ -171,7 +173,7 @@ invoke  active_record
 
 Then, if you go to the file location.rb in app/models
 
-```
+```ruby
 class Location < ActiveRecord::Base
 end
 ```
@@ -197,7 +199,7 @@ Then, if you go to app/db/migrate/xxxxxxx_create_locations.rb
 	
 There you can do any modifications, in our file it has to look like that
 
-```
+```ruby
 class CreateLocations < ActiveRecord::Migration
   def change
     create_table :locations do |t|
@@ -278,7 +280,7 @@ Database comunicates with the Model.
 
 #####Implementing the first request =D
 
-```
+```ruby
 #config/routes.rb
 Rails.application.routes.draw do
 	get 'locations' => 'locations#index'
@@ -286,7 +288,7 @@ end
 ```
 
 
-```
+```ruby
 #controllers/locations_controller.rb
 class LocationsController < ApplicationController
 	def index
@@ -296,7 +298,7 @@ end
 ```
 
 
-```
+```ruby
 	#views/locations/index.html.erb
 	<table class="table">
   		<% @locations.each do |l| %>
@@ -323,7 +325,7 @@ Now, imagine you want to send by url the id of a location, and then show this sp
 
 Before anything, we should test. So, let's write what do we want to test in the location controller testing file, which was created authomatically when we created the controller. 
 
-```
+```ruby
 #spec/controllers/locations_controller_spec.rb
 require 'rails_helper'
 
@@ -347,8 +349,8 @@ end
 
 Run the test typing the following command: 
 
-```
-rake spec:controllers
+```bash
+$ rake spec:controllers
 ```
 
 We use this command instead of 'rspec' in order to test only the controllers tests. 
@@ -356,7 +358,7 @@ The tests fail, so we have to implement the methods in order to make it work.
 
 In routes.rb, add the line:
 
-```
+```ruby
 get 'locations/:id' => 'locations#show'
 ```
 
@@ -401,14 +403,14 @@ and create another table. In the repo, you can see it at #db/migrate#xxxxx_creat
 If we want to create the foreign key, we have to go to the **model** and write the following lines:
 
 
-```
-	#app/models/visit.rb
-		belongs_to: location
+```ruby
+#app/models/visit.rb
+belongs_to: location
 ```
 
-```
-	#app/models/locations.rb
-		has_many: visits
+```ruby
+#app/models/locations.rb
+has_many: visits
 ```
 
 
@@ -424,7 +426,7 @@ If you want to try now how do your migrations work, there is a amazing gem you c
 In our case, we can write that in our seed.rb file:
 
 
-```
+```ruby
 require 'faker'
 Location.destroy_all
 Visit.destroy_all
@@ -460,7 +462,7 @@ You can find more info about [Testing Routes][9] and [Rspec Routes][10]
 
 This is the way we tested the index routing when going to locations:
 
-```
+```ruby
 require 'rails_helper'
 
 RSpec.describe "Routes", :type => :routing do
@@ -486,13 +488,13 @@ Writing consistent code. For example, in our case, we do not want to create a vi
 
 We do the validations adding the following line in the location model: (remember: app/models/location.rb)
 
-```
+```ruby
 validates :name, presence: true
 ```
 
 Now, if we go to the console, this is what we will find:
 
-```
+```bash
 2.0.0-p481 :001 > location = Location.new
  => #<Location id: nil, name: nil, created_at: nil, updated_at: nil, city: nil, zip_code: nil, street: nil, country: nil, description: nil>
 2.0.0-p481 :002 > location.valid?
@@ -518,7 +520,7 @@ Other validations:
 
 You can create your own validations!
 
-```
+```ruby
 def from_date_it_before_to_date
 	if from_date.to_i > to_date.to_i
 		errors.add(:form_date, 'Your from date can not be bigger than your to_date')
@@ -529,7 +531,7 @@ end
 
 And then, to include that method as a validation, you have to do it like before but typing "validate" instead of "validates"
 
-```
+```ruby
 validate :from_date_it_before_to_date
 ```
 
