@@ -6,7 +6,17 @@
   						</div>
   						<div class="panel-body">
               				<h2><%= @location.name %></h2>
+              				<% if flash[:notice] %>
+              				<div class="alert alert-success">
+    							<a href="#" class="close" data-dismiss="alert">&times;</a>
+    								<strong>Success!</strong> <% flash.each do |name, msg| -%>
+      								<%= content_tag :div, msg, class: name %>
+    								<% end -%>
+							</div>
+							<% end %>
               				<%= render 'visit_loop' %>
+              				<a href="../locations" class="btn btn-default">Back to Locations</a>
+              			<%= button_to 'Create new visit', new_location_visit_path(@location), :method => :get , :class => 'btn btn-default' %>
   				    </div>
 					</div>
 					<a href="../locations" class="btn btn-default">Back to Locations</a>

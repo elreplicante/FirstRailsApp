@@ -1,0 +1,28 @@
+	<div class="container-fluid">
+		<div class="row">
+				<div class="panel-body">
+					<div class="panel panel-info">
+  						<div class="panel-heading todo-title"><h2>Update visit</h2>
+  						</div>
+  						<div class="panel-body">
+    						<h3>Update the fields you need</h3>
+                <div class ="row">
+                <div class="col-md-4">
+    						<%= bootstrap_form_for [@location, @visit] do |f| %>
+    				
+    						<%= f.text_field :user_name %>
+    						<br/>
+    						<%= f.datetime_select(:from_date, default: Time.now) %>
+    						<br/>
+    						<%= f.datetime_select(:to_date, default: Time.now + 1.days) %>
+    						<br/>
+    						<%= f.submit "Update", :class => "btn btn-success" %>
+    						<% end %>
+                </div>
+                </div>
+                <%= button_to 'Back', location_path(@location.id), :class => 'btn btn-default', :method => :get %>
+  						</div>
+					</div>
+				</div>
+			</div>
+		</div>

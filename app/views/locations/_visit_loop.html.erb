@@ -1,5 +1,15 @@
 <ul>
-	<% @location.visits.each do  |v| %>
-		<li><%= v.user_name %></li>
+	<% @location.visits.each do  |visit| %>
+		<li><%= visit.user_name %>
+			<br/>From: <%= visit.from_date %>
+ 			<br/>To: <%= visit.to_date %>
+ 			<br/>
+ 			<div class="btn-group inline">
+ 			<%= button_to 'edit', edit_location_visit_path(@location,
+					visit), :method => :get, :class => 'btn btn-default'%>
+ 			<%= button_to 'delete', location_visit_path(@location, 
+			visit), method: 'delete', confirm: "Are you sure?", :class => 'btn btn-danger'%>
+			</div>
+			</li>
 	<%end%>
 </ul>
