@@ -2,38 +2,38 @@
 
 ###Install rails and create scaffolding
 ```bash
-$ rails new meet_me --skip-bundle	--database=postgresql --skip-test-unit
+$ rails new meet_me --skip-bundle   --database=postgresql --skip-test-unit
 ```
 
 * Scaffolding
-	* app
-		* assets
-			* js
-			* css
-			* img
-			* ...
-		* controllers
-			* application_controler.rb
-			* concerns
-		* helpers
-			* application_helper.rb
-		* models
-			* *everything you want to build*
-			* concerns
-		* views	 
-			* *everything you want to get as a result (webpages)*
-			* layouts
-				* index.html.erb
-				
+    * app
+        * assets
+            * js
+            * css
+            * img
+            * ...
+        * controllers
+            * application_controler.rb
+            * concerns
+        * helpers
+            * application_helper.rb
+        * models
+            * *everything you want to build*
+            * concerns
+        * views  
+            * *everything you want to get as a result (webpages)*
+            * layouts
+                * index.html.erb
+                
 
 
 
 * Gemfile
-	* Gems you want to use in your project, which includes functionalities you'll need in your project. **Libraries we'll need in the application**	
-	* we commented the coffeescript gem and then we added the following line to use rspec for testing:
+    * Gems you want to use in your project, which includes functionalities you'll need in your project. **Libraries we'll need in the application** 
+    * we commented the coffeescript gem and then we added the following line to use rspec for testing:
 
 
-	>	gem 'rspec-rails', group: [:test, :development]
+    >   gem 'rspec-rails', group: [:test, :development]
 
 **IMPORTANT**
 in the gemfile, you have to include just after the first line (source...) the ruby version you have
@@ -74,7 +74,7 @@ Because what do we want is to be able to refactor, reuse our code. View can be s
 * Generate a controller
 
 ```bash
-rails g controller home	
+rails g controller home 
 ```
 It will be created in app/controllers/home_controller.rb
 
@@ -83,9 +83,9 @@ There, we have to create a render like this:
 ```ruby
 #app/controllers/home_controller.rb
 class HomeController < ApplicationController
-	def welcome
-		render "welcome"
-	end
+    def welcome
+        render "welcome"
+    end
 end
 ```
 
@@ -98,17 +98,17 @@ get 'home' => 'home#welcome'
 Now, you have to create the view!
 
 ```
-	#app/views/home/welcome.html.erb
-	<h1>Welcome!</h1>
+    #app/views/home/welcome.html.erb
+    <h1>Welcome!</h1>
 ```
 
 
 To see your code in the server, go to the browser and type
 
->	localhost:3000/home
+>   localhost:3000/home
 
 *Note: this is the porty I have by running the server, it may change*
-	
+    
 
 
 Your main page has to be defined in the config file by: root 'home#welcome' (for example)
@@ -123,12 +123,12 @@ You have to follow this conventions in order to write less code and make it bett
 
 
 * Cool info: 
-	* [api.rubyonrails][1]
-	* [apidock][2]
-	* [github/rails][3]
-	* [ruby doc][4]
-	* ```bundle open activerecord```
-	
+    * [api.rubyonrails][1]
+    * [apidock][2]
+    * [github/rails][3]
+    * [ruby doc][4]
+    * ```bundle open activerecord```
+    
 
 
 
@@ -183,10 +183,10 @@ What is ActiveRecord?
 * ORM (Objectrelational mapping) included in Ruby on Rails
 * Maps Ruby objects to the database
 * How does it work? -> it creates a DB
-	* Classes are mapped to tables
-	* Objects are mapped to rows 
+    * Classes are mapped to tables
+    * Objects are mapped to rows 
 * For example: 
-	* ```set_table_name 'location'```
+    * ```set_table_name 'location'```
 
 * It follows the name convention in Rails
 * As you can see, rails has pluralized the name location into locations when you create a table.
@@ -195,8 +195,8 @@ What is ActiveRecord?
 **Note: to use the console, type: ```rails c```
 
 Then, if you go to app/db/migrate/xxxxxxx_create_locations.rb
-	You'll see how rails has created a table with the name in plural
-	
+    You'll see how rails has created a table with the name in plural
+    
 There you can do any modifications, in our file it has to look like that
 
 ```ruby
@@ -225,7 +225,7 @@ Timestamp attributes:
 * created_at
 * updated_at
 * **These values shouldn't be EVER modified by you**
-	
+    
 Migrations commands:
 
 * create_table :table_name
@@ -240,14 +240,14 @@ rails -g migration <migration_name>
 * You can create new objects in rails using different ways. 
 * Open the rails console: ```rails c```
 * Then type:
-	* ```l = Location.new```
-	* ```l.name = "Home"```
-	* ```l.city = "Barcelona"```
-	* ```l.save```
+    * ```l = Location.new```
+    * ```l.name = "Home"```
+    * ```l.city = "Barcelona"```
+    * ```l.save```
 
 This is just an example. You can also type:
-	* ```l = Location.create name:'Home', city: 'Barcelona'```
-	* ```l.save```
+    * ```l = Location.create name:'Home', city: 'Barcelona'```
+    * ```l.save```
 
 
 ####Testing with RSpec
@@ -283,7 +283,7 @@ Database comunicates with the Model.
 ```ruby
 #config/routes.rb
 Rails.application.routes.draw do
-	get 'locations' => 'locations#index'
+    get 'locations' => 'locations#index'
 end
 ```
 
@@ -291,24 +291,24 @@ end
 ```ruby
 #controllers/locations_controller.rb
 class LocationsController < ApplicationController
-	def index
-		@locations = Location.order('created_at DESC').limit(10)
-	end
+    def index
+        @locations = Location.order('created_at DESC').limit(10)
+    end
 end
 ```
 
 
 ```ruby
-	#views/locations/index.html.erb
-	<table class="table">
-  		<% @locations.each do |l| %>
-  			<tr>
-  				<td><%=l.name %></td>
-  				<td><%=l.city %></td>
-  				<td><%=l.description %></td>
-  				<td><%=l.zip_code %></td>
-   			</tr>
-		<%end%>
+#views/locations/index.html.erb
+<table class="table">
+    <% @locations.each do |l| %>
+        <tr>
+            <td><%=l.name %></td>
+            <td><%=l.city %></td>
+            <td><%=l.description %></td>
+            <td><%=l.zip_code %></td>
+        </tr>
+    <%end%>
 ```
 
 
@@ -330,20 +330,20 @@ Before anything, we should test. So, let's write what do we want to test in the 
 require 'rails_helper'
 
 RSpec.describe LocationsController, :type => :controller do
-	describe "GET #show:id" do
-		before (:each) do
-		  	@location = Location.create!(name: 'Murcia', description: 'Hot City')
-		    get :show, id: @location.id
-		end
-		it "responds successfully with an HTTP 200 status code" do
-      		expect(response).to be_success
-      		expect(response).to have_http_status(200)
-		end
+    describe "GET #show:id" do
+        before (:each) do
+            @location = Location.create!(name: 'Murcia', description: 'Hot City')
+            get :show, id: @location.id
+        end
+        it "responds successfully with an HTTP 200 status code" do
+            expect(response).to be_success
+            expect(response).to have_http_status(200)
+        end
 
-		it "render show template" do
-	      expect(response).to render_template :show
-		end
-	end
+        it "render show template" do
+          expect(response).to render_template :show
+        end
+    end
 end
 ```
 
@@ -386,7 +386,7 @@ In the repo, you might have seen that in the different layouts there is no <head
 The answer is that everything you want to include in every page, as a header, style whatever, should be in the following file:
 
 ```
-	app/views/layouts/application.html.erb
+    app/views/layouts/application.html.erb
 ```
 
 
@@ -432,20 +432,20 @@ Location.destroy_all
 Visit.destroy_all
 
 20.times do |n|
-	location = Location.create(
-		name: Faker::Company.catch_phrase, 
-		street: Faker::Address.street_address, 
-		city: Faker::Address.city, 
-		zip_code: Faker::Address.zip_code, 
-		country: Faker::Address.country,
-		description: Faker::Lorem.sentence)
+    location = Location.create(
+        name: Faker::Company.catch_phrase, 
+        street: Faker::Address.street_address, 
+        city: Faker::Address.city, 
+        zip_code: Faker::Address.zip_code, 
+        country: Faker::Address.country,
+        description: Faker::Lorem.sentence)
 end
 
 40.times do |n|
-		visit = Visit.create(
-			location: Location.all.sample(1)
-			user_name: Faker::Internet.user_name
-		)
+        visit = Visit.create(
+            location: Location.all.sample(1)
+            user_name: Faker::Internet.user_name
+        )
 end
 ```
 
@@ -467,14 +467,14 @@ require 'rails_helper'
 
 RSpec.describe "Routes", :type => :routing do
   describe "Testing locations " do
-		it "routes to locations index" do
-			expect(get: "/locations").to route_to("locations#index")
-		end
+        it "routes to locations index" do
+            expect(get: "/locations").to route_to("locations#index")
+        end
 
-		it "routes to location with id" do
-			expect(get: "/locations/999").to route_to(controller: "locations", action: "show", id: "999")
-		end
-	end
+        it "routes to location with id" do
+            expect(get: "/locations/999").to route_to(controller: "locations", action: "show", id: "999")
+        end
+    end
 end
 ```
 
@@ -522,9 +522,9 @@ You can create your own validations!
 
 ```ruby
 def from_date_it_before_to_date
-	if from_date.to_i > to_date.to_i
-		errors.add(:form_date, 'Your from date can not be bigger than your to_date')
-	end
+    if from_date.to_i > to_date.to_i
+        errors.add(:form_date, 'Your from date can not be bigger than your to_date')
+    end
 end
 ```
 
@@ -545,12 +545,3 @@ validate :from_date_it_before_to_date
 [8]: https://github.com/stympy/faker
 [9]: http://guides.rubyonrails.org/testing.html#testing-routes
 [10]: https://www.relishapp.com/rspec/rspec-rails/docs/routing-specs
-
-
-
-
-
-
-
-
-
