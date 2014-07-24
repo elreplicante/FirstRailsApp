@@ -1,11 +1,9 @@
 ##Rails Project
 
 ###Install rails and create scaffolding
-	> rails new meet_me \
-	--skip-bundle \
-	--database=postgresql \
-	--skip-test-unit
-
+```bash
+	$ rails new meet_me --skip-bundle	--database=postgresql --skip-test-unit
+```
 
 * Scaffolding
 	* app
@@ -40,10 +38,12 @@
 **IMPORTANT**
 in the gemfile, you have to include just after the first line (source...) the ruby version you have
 
-in my case: 
+in my case:
 
-	> 	#ruby=2.0.0
-	    ruby '2.0.0'
+```ruby
+	#ruby=2.0.0
+	ruby '2.0.0'
+```
 
 *Note: If you have any problems, which is very probably, just type the errors you find in the terminal and look for it in google =D*
 
